@@ -1,4 +1,6 @@
- <footer class="main-footer">
+
+        <!-- main-footer -->
+        <footer class="main-footer">
             <div class="footer-top bg-color-2">
                 <div class="auto-container">
                     <div class="row clearfix">
@@ -81,3 +83,12 @@
                 </div>
             </div>
         </footer>
+        <!-- main-footer end -->
+
+
+
+        <!--Scroll to top-->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <span class="fal fa-angle-up"></span>
+        </button>
+    </div>

@@ -1,12 +1,16 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
 
+@section('title')
+  Easy Real Estate Complete Project  
+@endsection
+
         <!-- banner-section -->
          @include('frontend.home.banner')
          <!-- banner-section end -->
  
 
-
+ 
 <!-- category-section -->
   @include('frontend.home.category')
 <!-- category-section end -->

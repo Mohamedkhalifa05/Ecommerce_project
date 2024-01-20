@@ -1,4 +1,6 @@
-  <section class="deals-section sec-pad">
+
+        <!-- deals-section -->
+        <section class="deals-section sec-pad">
             <div class="auto-container">
                 <div class="sec-title">
                     <h5>Hot Property</h5>
@@ -136,3 +138,4 @@
 
             </div>
         </section>
+        <!-- deals-section end -->

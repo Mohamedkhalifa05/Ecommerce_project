@@ -7,10 +7,10 @@
         <section class="page-title centred" style="background-image: url({{ asset('frontend/assets/images/background/page-title-5.jpg') }});">
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>Change Password  </h1>
+                    <h1>Live Chat  </h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="index.html">Home</a></li>
-                        <li>Change Password</li>
+                        <li>Live Chat</li>
                     </ul>
                 </div>
             </div>
@@ -35,7 +35,7 @@
 
 
 
-        <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+        <div class="col-lg-3 col-md-3 col-sm-3 sidebar-side">
             <div class="blog-sidebar">
               <div class="sidebar-widget post-widget">
                     <div class="widget-title">
@@ -68,48 +68,22 @@
 
 
 
-  <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+  <div class="col-lg-9 col-md-9 col-sm-9 content-side">
                         <div class="blog-details-content">
                             <div class="news-block-one">
                                 <div class="inner-box">
                                     
                                     <div class="lower-content">
-                                        
-                                         
-                                      
-          
- <form action="{{ route('user.password.update') }}" method="post" class="default-form" enctype="multipart/form-data">
- 	@csrf
+                  
+            <h3>Live Chat Box </h3>
 
 
 
- 	  <div class="form-group">
-            <label>Old Password</label>
-            <input type="password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" id="old_password">
-             @error('old_password')
-           <span class="text-danger">{{ $message }}</span>
-           @enderror
-        </div>
-
-          <div class="form-group">
-            <label>New Password </label>
-            <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror" id="new_password">
-             @error('new_password')
-           <span class="text-danger">{{ $message }}</span>
-           @enderror
-        </div>
+ <div id="app">
+ <chat-message></chat-message>
+ </div>
 
 
-          <div class="form-group">
-            <label>Confirm New Password</label>
-            <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation"> 
-        </div>
- 
-
-        <div class="form-group message-btn">
-            <button type="submit" class="theme-btn btn-one">Save Changes </button>
-        </div>
-    </form>
 
  
 

@@ -1,0 +1,41 @@
+
+.dropdown  .dropdown-menu {
+  display: none;
+}
+.dropdown:hover > .dropdown-menu , .dropend:hover > .dropdown-menu {
+  display: block;
+  margin-top: .125em;
+  margin-left: .125em;
+
+}
+
+@media screen and (min-width:769px){
+  .dropend:hover > .dropdown-menu{
+    position: relative;
+    top: 0;
+    left: 100%;
+  };
+
+}
+.li-a :hover , .new:hover {
+  background-color: #2DBE6C !important;
+  color:white !important;
+}
+.add {
+position: absolute;
+top: -1px;
+margin-left: 157px;
+  background-color: white;
+}
+.dropend .dropdown-toggle::after {
+  margin-left: 65px !important;
+  font-size: 22px;
+}
+/* .fa-user:before {
+
+  /* margin-left: -22px; 
+}*/
+.inner {
+  width: 63%;
+  margin-left: 202px;
+}

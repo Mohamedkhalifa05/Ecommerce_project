@@ -1,8 +1,11 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
+@section('title')
+User Login | Easy RealEstate  
+@endsection
 
 <!--Page Title-->
-     <section class="page-title-two bg-color-1 centred">
+     {{-- <section class="page-title-two bg-color-1 centred">
          <div class="pattern-layer">
              <div class="pattern-1" style="background-image: url({{ asset('frontend/assets/images/shape/shape-9.png') }});"></div>
              <div class="pattern-2" style="background-image: url({{ asset('frontend/assets/images/shape/shape-10.png') }});"></div>
@@ -16,7 +19,7 @@
                  </ul>
              </div>
          </div>
-     </section>
+     </section> --}}
      <!--End Page Title-->
 
 
@@ -24,7 +27,7 @@
      <section class="ragister-section centred sec-pad">
          <div class="auto-container">
              <div class="row clearfix">
-                 <div class="col-xl-8 col-lg-12 col-md-12 offset-xl-2 big-column">
+                 <div style="margin-top: -97px" class="col-xl-8 col-lg-12 col-md-12 offset-xl-2 big-column">
                      <div class="sec-title">
                           
                      </div>
@@ -37,7 +40,7 @@
                          </div>
  <div class="tabs-content">
      <div class="tab active-tab" id="tab-1">
-         <div class="inner-box">
+         <div class="inner-box inner">
              <h4>Sign in</h4>
              <form action="{{ route('login') }}" method="post" class="default-form">
             @csrf
@@ -62,7 +65,7 @@
          </div>
      </div>
      <div class="tab" id="tab-2">
-         <div class="inner-box">
+         <div class="inner-box inner">
              <h4>Sign in</h4>
             
              <form action="{{ route('register') }}" method="post" class="default-form">
