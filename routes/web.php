@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,37 @@ Route::middleware(["auth","role:admin"])->group(function() {
     
 
 });// Middleware Admin 
+
+Route::middleware(["auth","role:admin"])->group(function() {
+
+   
+
+    Route::controller(PropertyTypeController::class)->group(function() {
+
+        Route::get("all/types","All_Types")->name("all.types") ;
+        Route::get("add/type","add_Type")->name("add.type") ;
+        Route::post("type/store","TypeStore")->name("store.type");
+        Route::get("edit/type/{id}" , "Edit_type")->name("edit.type");
+        Route::post("update/type/{id}","Update_type")->name("update.type");
+        Route::get("delete/type/{id}","Delete_type")->name("delete.type");
+
+    });
+
+    ///// Route Amenities
+    Route::controller(PropertyTypeController::class)->group(function() {
+
+        Route::get("all/Amenities","All_Amenities")->name("all.Amenities") ;
+        Route::get("add/amenitie","Add_amenitie")->name("add.amenitie") ;
+        Route::post("store/amenitie","Store_amenitie")->name("store.amenitie");
+        Route::get("edit/amenitie/{id}" , "Edit_amenitie")->name("edit.amenitie");
+        Route::post("update/amenitie/{id}","Update_amenitie")->name("update.amenitie");
+        Route::get("delete/amenitie/{id}","Delete_amenitie")->name("delete.amenitie");
+
+    });
+
+    
+
+});// Middleware Admin  Property
 Route::middleware(["auth","role:agent"])->group(function() {
 
 Route::get('/agent/dashboard', [AgentController::class,"Agent_Dashboard"])->name('Agent_Dashboard');
