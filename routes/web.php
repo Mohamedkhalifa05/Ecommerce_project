@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,6 +86,19 @@ Route::middleware(["auth","role:admin"])->group(function() {
         Route::get("edit/amenitie/{id}" , "Edit_amenitie")->name("edit.amenitie");
         Route::post("update/amenitie/{id}","Update_amenitie")->name("update.amenitie");
         Route::get("delete/amenitie/{id}","Delete_amenitie")->name("delete.amenitie");
+
+    });
+
+    //Route Property
+
+    Route::controller(PropertyController::class)->group(function() {
+
+        Route::get("all/Properties","All_property")->name("all.Properties") ;
+        Route::get("add/Property","Add_Property")->name("add.Property") ;
+        // Route::post("store/amenitie","Store_amenitie")->name("store.amenitie");
+        // Route::get("edit/amenitie/{id}" , "Edit_amenitie")->name("edit.amenitie");
+        // Route::post("update/amenitie/{id}","Update_amenitie")->name("update.amenitie");
+        // Route::get("delete/amenitie/{id}","Delete_amenitie")->name("delete.amenitie");
 
     });
 

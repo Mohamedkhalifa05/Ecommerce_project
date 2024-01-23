@@ -48,7 +48,8 @@
 
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
  
-
+   <link rel="stylesheet" href="{{ asset('backend/assets/vendors/select2/select2.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('backend/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
  
 </head>
 <body>
@@ -149,6 +150,24 @@ switch(type){
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
+
+  <!-- Input Tags -->
+  <script src="{{ asset('backend/assets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+
+  <script src="{{ asset('backend/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+
+  <script src="{{ asset('backend/assets/js/inputmask.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/select2.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/typeahead.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/tags-input.js') }}"></script>
+
+    <!-- Input Tags -->
+    <!-- tinymce -->
+    <script src="{{ asset('backend/assets/vendors/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/tinymce.js') }}"></script>
+<!-- tinymce -->
 
 </body>
 </html>  
