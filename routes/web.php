@@ -95,7 +95,7 @@ Route::middleware(["auth","role:admin"])->group(function() {
 
         Route::get("all/Properties","All_property")->name("all.Properties") ;
         Route::get("add/Property","Add_Property")->name("add.Property") ;
-        // Route::post("store/amenitie","Store_amenitie")->name("store.amenitie");
+        Route::post("store/Property","Store_Property")->name("store.Property");
         // Route::get("edit/amenitie/{id}" , "Edit_amenitie")->name("edit.amenitie");
         // Route::post("update/amenitie/{id}","Update_amenitie")->name("update.amenitie");
         // Route::get("delete/amenitie/{id}","Delete_amenitie")->name("delete.amenitie");
