@@ -1,7 +1,7 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
 @section('title')
-User Login | Easy RealEstate  
+User Login 
 @endsection
 
 <!--Page Title-->

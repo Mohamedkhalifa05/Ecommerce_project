@@ -22,11 +22,25 @@
         <thead>
           <tr>
             <th>#</th>
+
             <th>Image</th>
+
             <th>Name</th>
+
             <th>P Type</th>
+
+
             <th>Status Type</th>
+
             <th>City</th>
+
+            <th>Code</th>
+
+            <th>Status</th>
+
+            {{-- <th>amenitie_id</th> --}}
+            
+
             <th>Action</th>
            
           </tr>
@@ -35,14 +49,15 @@
             @foreach ($properties as $key=>$property)
           <tr>
             <td>{{$key+1}}</td>
-            <td><img src="{{asset('$property->property_thambnail')}}"
+            <td><img src="{{asset($property->property_thambnail)}}"
                alt="property_img" style="height: 40px;width:70px"></td>
                <td>{{ $property->property_name }}</td> 
-               <td>{{ $property->ptype_id }}</td> 
+               <td>{{ $property["type"]["type_name"] }}</td> 
                <td>{{ $property->property_status }}</td> 
                <td>{{ $property->city }}</td> 
-               <td> 
-                      @if($item->status == 1)
+               <td>{{ $property->property_code }}</td> 
+               <td>
+                      @if($property->status == 1)
                 <span class="badge rounded-pill bg-success">Active</span>
                       @else
                <span class="badge rounded-pill bg-danger">InActive</span>
@@ -50,8 +65,10 @@
 
                </td> 
             <td>
-                <a href="{{route('edit.type',$type->id)}}" class="btn btn-inverse-warning">Edit</a>
-                <a href="{{route('delete.type',$type->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>
+              <a href="{{route('details.property',$property->id)}}" class="btn btn-inverse-info" title="Details"><i data-feather="eye"></i></a>
+
+                <a href="{{route('edit.property',$property->id)}}" class="btn btn-inverse-warning" title="Edit"><i data-feather="edit"></i></a>
+                <a href="{{route('delete.property',$property->id)}}" class="btn btn-inverse-danger" id="delete" title="Delete"><i data-feather="trash-2"></i></a>
             </td>
            
           </tr>

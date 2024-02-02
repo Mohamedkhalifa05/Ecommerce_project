@@ -10,4 +10,21 @@ class Property extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+     public function type() {
+
+        return $this->belongsTo(PropertType::class,"ptype_id","id");
+
+     }//End Method
+
+     public function Amenitie() {
+
+      return $this->belongsTo(Amenities::class,"amenities_id","id");
+
+     }//End Method
+     public function user() {
+
+      return $this->belongsTo(User::class,"agent_id","id");
+
+     }//end method
 }
