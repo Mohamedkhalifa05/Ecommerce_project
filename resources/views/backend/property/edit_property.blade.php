@@ -73,7 +73,7 @@
 
 
 
-         <div class="col-sm-12">
+         {{-- <div class="col-sm-6">
             <div class="mb-3 form-group">
                 <label class="form-label">Multiple Image </label>
                 <input type="file" name="multi_img[]" class="form-control" id="multiImg" multiple="" >
@@ -81,7 +81,7 @@
          <div class="row" id="preview_img"> </div>
 
             </div>
-        </div><!-- Col -->
+        </div><!-- Col --> --}}
 
 
 
@@ -217,7 +217,7 @@
                 <select name="amenities_id[]" class="js-example-basic-multiple form-select" multiple="multiple" data-width="100%">
 
                   @foreach($amenities as $ameni)
-                 <option style="background-color: #6571FF" value="{{ $ameni->id }}" {{(in_array($ameni->id,$property_ameni)) ? "selected" : "" }}>{{ $ameni->amenitie_name }}</option>
+                 <option style="background-color: #6571FF" value="{{ $ameni->amenitie_name }}" {{(in_array($ameni->amenitie_name,$property_ameni)) ? "selected" : "" }}>{{ $ameni->amenitie_name }}</option>
                 @endforeach
  
              </select>
@@ -228,7 +228,7 @@
                 <label class="form-label"> Agent </label>
                  {{-- <input type="text" name="neighborhood"  class="form-control" > --}}
                  <select name="agent_id" class="form-select" id="exampleFormControlSelect1">
-                  <option selected="" disabled="">Select Agent</option>
+                  <option value="admin">Select Agent</option>
                  @foreach($activeAgent as $agent)
                   <option value="{{ $agent->id }}"
                     {{$property->agent_id == $agent->id  ? "selected":""}}>{{ $agent->name }}</option>
@@ -245,7 +245,7 @@
         <div class="mb-3">
             <label class="form-label">Short Description</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" name="Short_des" rows="3">
-                {!!$property->property_name!!}"
+                {!!$property->short_descp!!}"
             </textarea>
 
              </div>
@@ -258,7 +258,7 @@
             <label class="form-label">Long Description</label>
 
             <textarea class="form-control" name="long_descp" id="tinymceExample" rows="10">
-                {!!$property->property_name!!}
+                {!!$property->long_descp!!}
             </textarea>
 
            </div>

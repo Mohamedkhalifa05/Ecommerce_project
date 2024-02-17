@@ -63,7 +63,7 @@
                 <img class="wd-80 rounded-circle" style="margin-left: 5px"
                  src="
                 {{(!empty($profileData->photo)) 
-                ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')
+                ? asset($profileData->photo) : url('upload/no_image.jpg')
                 
                 }}" 
                 alt="profile">
@@ -170,7 +170,7 @@
                                         <img class="wd-80 rounded-circle mt-2" id="showImage"
                                        src="
                                      {{(!empty($profileData->photo)) 
-                                     ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')
+                                     ? asset($profileData->photo) : url('upload/no_image.jpg')
                 
                                        }}" 
                                       alt="profile">

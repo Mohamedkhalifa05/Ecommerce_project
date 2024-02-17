@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Amenities;
 use App\Models\Facility;
 use App\Models\MultiImage;
+use App\Models\PackagePlan;
 use App\Models\Property;
 use App\Models\User;
 use App\Models\PropertType;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Return_;
 use PHPUnit\Framework\Constraint\Count;
@@ -41,6 +44,7 @@ class PropertyController extends Controller
     }//End Method
 
     public function Store_Property(Request $request) {
+       
 
         $p_code = IdGenerator::generate(["table"=> "properties","field" => "property_code","length"=>5,"prefix" => "Pc"]);
 
@@ -52,6 +56,46 @@ class PropertyController extends Controller
         $name_gen = hexdec(uniqid()).".".$image->getClientOriginalExtension();
         Image::make($image)->resize(370,250)->save("upload/property/thambnail/".$name_gen);
         $save_url = "upload/property/thambnail/".$name_gen;
+
+        if($request->agent_id == null) {
+            $property_id = Property::insertGetId([
+                "ptype_id" => $request->ptype_id,
+                "amenities_id" => $amenities,
+                "property_name" => $request->property_name,
+                "property_slug" => strtolower(str_replace(" ","-",$request->property_name)),
+                "property_code" => $p_code,
+                "property_status" => $request->property_status,
+                "lowest_price" => $request->lowest_price,
+                "max_price" => $request->max_price,
+                "short_descp" => $request->Short_des,
+                "long_descp" => $request->long_descp,
+                "bedrooms" => $request->bedrooms,
+    
+                "bathrooms" => $request->bathrooms,
+                "garage" => $request->garage,
+                "garage_size" => $request->garage_size,
+                "property_size" => $request->property_size,
+                "property_video" => $request->property_video,
+                "address" => $request->address,
+                "city" => $request->city,
+                "state" => $request->state,
+                "postal_code" => $request->postal_code,
+    
+                "neighborhood" => $request->neighborhood,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude,
+                "featured" => $request->featured,
+                "hot" => $request->hot,
+              
+                "agent_id" => Auth::user()->id,
+                "status" => 1,
+                "property_thambnail" => $save_url,
+                "created_at" => Carbon::now(),
+                
+            ]);
+            
+        } else {
+            
         $property_id = Property::insertGetId([
             "ptype_id" => $request->ptype_id,
             "amenities_id" => $amenities,
@@ -80,12 +124,14 @@ class PropertyController extends Controller
             "longitude" => $request->longitude,
             "featured" => $request->featured,
             "hot" => $request->hot,
+          
             "agent_id" => $request->agent_id,
             "status" => 1,
             "property_thambnail" => $save_url,
             "created_at" => Carbon::now(),
             
         ]);
+    }
 
         /// Upload multiple Image
 
@@ -152,46 +198,87 @@ class PropertyController extends Controller
     public function update_Property(Request $request) {
 
         
-
+       
+    // dd(Auth::user()->id);
 
         $ameni = $request->amenities_id;
         $amenities = implode(",",$ameni);
 
         $property_id = $request->id;
 
-        Property::findOrFail($property_id)->update([
-            "ptype_id" => $request->ptype_id,
-            "amenities_id" => $amenities,
-            "property_name" => $request->property_name,
-            "property_slug" => strtolower(str_replace(" ","-",$request->property_name)),
-            // "property_code" => $p_code,
-            "property_status" => $request->property_status,
-            "lowest_price" => $request->lowest_price,
-            "max_price" => $request->max_price,
-            "short_descp" => $request->Short_des,
-            "long_descp" => $request->long_descp,
-            "bedrooms" => $request->bedrooms,
+        if ($request->agent_id == "admin") {
+            Property::findOrFail($property_id)->update([
+                "ptype_id" => $request->ptype_id,
+                "amenities_id" => $amenities,
+                "property_name" => $request->property_name,
+                "property_slug" => strtolower(str_replace(" ","-",$request->property_name)),
+                // "property_code" => $p_code,
+                "property_status" => $request->property_status,
+                "lowest_price" => $request->lowest_price,
+                "max_price" => $request->max_price,
+                "short_descp" => $request->Short_des,
+                "long_descp" => $request->long_descp,
+                "bedrooms" => $request->bedrooms,
+    
+                "bathrooms" => $request->bathrooms,
+                "garage" => $request->garage,
+                "garage_size" => $request->garage_size,
+                "property_size" => $request->property_size,
+                "property_video" => $request->property_video,
+                "address" => $request->address,
+                "city" => $request->city,
+                "state" => $request->state,
+                "postal_code" => $request->postal_code,
+    
+                "neighborhood" => $request->neighborhood,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude,
+                "featured" => $request->featured,
+                "hot" => $request->hot,
+                "agent_id" => Auth::user()->id,
+                
+                "updated_at" => Carbon::now(),
+            ]);
+           
+        } else {
+            Property::findOrFail($property_id)->update([
+                "ptype_id" => $request->ptype_id,
+                "amenities_id" => $amenities,
+                "property_name" => $request->property_name,
+                "property_slug" => strtolower(str_replace(" ","-",$request->property_name)),
+                // "property_code" => $p_code,
+                "property_status" => $request->property_status,
+                "lowest_price" => $request->lowest_price,
+                "max_price" => $request->max_price,
+                "short_descp" => $request->Short_des,
+                "long_descp" => $request->long_descp,
+                "bedrooms" => $request->bedrooms,
+    
+                "bathrooms" => $request->bathrooms,
+                "garage" => $request->garage,
+                "garage_size" => $request->garage_size,
+                "property_size" => $request->property_size,
+                "property_video" => $request->property_video,
+                "address" => $request->address,
+                "city" => $request->city,
+                "state" => $request->state,
+                "postal_code" => $request->postal_code,
+    
+                "neighborhood" => $request->neighborhood,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude,
+                "featured" => $request->featured,
+                "hot" => $request->hot,
+                "agent_id" => $request->agent_id,
+                // "status" => 1,
+                // "property_thambnail" => $save_url,
+                "updated_at" => Carbon::now(),
+            ]);
+            
+        }
+        
 
-            "bathrooms" => $request->bathrooms,
-            "garage" => $request->garage,
-            "garage_size" => $request->garage_size,
-            "property_size" => $request->property_size,
-            "property_video" => $request->property_video,
-            "address" => $request->address,
-            "city" => $request->city,
-            "state" => $request->state,
-            "postal_code" => $request->postal_code,
-
-            "neighborhood" => $request->neighborhood,
-            "latitude" => $request->latitude,
-            "longitude" => $request->longitude,
-            "featured" => $request->featured,
-            "hot" => $request->hot,
-            "agent_id" => $request->agent_id,
-            // "status" => 1,
-            // "property_thambnail" => $save_url,
-            "updated_at" => Carbon::now(),
-        ]);
+        
 
         $notification = array(
             "message" => 'Property Updated Successufully',
@@ -437,5 +524,31 @@ class PropertyController extends Controller
         return redirect()->route("all.Properties")->with($notification);
 
       }//End Method
+
+
+      public function AdminPackageHistory() {
+   
+        $packageHistory = PackagePlan::get();
+
+    return view("admin.package.package_history",compact('packageHistory'));
+
+
+      }//End Method
+
+      public function adminPackageInvoice($id) {
+
+        
+        $packagehistory = PackagePlan::where("id",$id)->first();
+        $username = $packagehistory->user->name;
+        
+    
+        $pdf = Pdf::loadView('agent.package.packageHistory', compact('packagehistory'))
+        ->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' =>public_path()
+        ]);
+        return $pdf->download($username."_".'invoice.pdf');
+    
+     }//End Method
 
 }

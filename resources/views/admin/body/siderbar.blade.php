@@ -70,10 +70,19 @@
               <li class="nav-item">
                 <a href="{{route('add.Property')}}" class="nav-link">Add Property</a>
               </li>
+
               
             </ul>
           </div>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="{{route('admin.package.history')}}"  >
+            <i class="link-icon" data-feather="calendar"></i>
+            <span class="link-title">Package History</span>
+           
+          </a>
+        </li>
+       
         {{-- <li class="nav-item">
           <a href="pages/apps/chat.html" class="nav-link">
             <i class="link-icon" data-feather="message-square"></i>
@@ -81,25 +90,27 @@
           </a>
         </li> --}}
        
-        <li class="nav-item nav-category">Components</li>
+        <li class="nav-item nav-category">User All Functions</li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
             <i class="link-icon" data-feather="feather"></i>
-            <span class="link-title">UI Kit</span>
+            <span class="link-title">Mange Agent</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
           <div class="collapse" id="uiComponents">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/ui-components/accordion.html" class="nav-link">Accordion</a>
+                <a href="{{route('all.agents')}}" 
+                class="nav-link">All agent</a>
               </li>
               <li class="nav-item">
-                <a href="pages/ui-components/alerts.html" class="nav-link">Alerts</a>
+                <a href="{{route('add.agent')}}"
+                 class="nav-link">Add agent</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="pages/ui-components/badges.html" class="nav-link">Badges</a>
-              </li>
-              <li class="nav-item">
+              </li> --}}
+              {{-- <li class="nav-item">
                 <a href="pages/ui-components/breadcrumbs.html" class="nav-link">Breadcrumbs</a>
               </li>
               <li class="nav-item">
@@ -139,8 +150,8 @@
                 <a href="pages/ui-components/pagination.html" class="nav-link">Pagination</a>
               </li>
               <li class="nav-item">
-                <a href="pages/ui-components/popover.html" class="nav-link">Popovers</a>
-              </li>
+                <a href="pages/ui-components/popover.html" class="nav-link">Popovers</a> --}}
+              {{-- </li>
               <li class="nav-item">
                 <a href="pages/ui-components/progress.html" class="nav-link">Progress</a>
               </li>
@@ -158,7 +169,7 @@
               </li>
               <li class="nav-item">
                 <a href="pages/ui-components/tooltips.html" class="nav-link">Tooltips</a>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </li>
