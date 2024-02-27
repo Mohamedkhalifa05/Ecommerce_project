@@ -231,6 +231,7 @@ Route::get('/', [UserController::class, 'Index']);
 Route::controller(IndexController::class)->group(function () {
     Route::get('property/details/{id}/{slug}', 'propertyDetails');
    Route::post('property/message', 'PropertyMessage')->name('property.message');
+   Route::get('agent/details/{id}', 'AgentDetails')->name('agent.details');
 });
 
 Route::controller(WishlistController::class)->group(function () {

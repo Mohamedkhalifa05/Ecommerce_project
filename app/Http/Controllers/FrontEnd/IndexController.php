@@ -7,6 +7,7 @@ use App\Models\Facility;
 use App\Models\MultiImage;
 use App\Models\Property;
 use App\Models\PropertyMessage;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,16 @@ class IndexController extends Controller
             
         }
         
+
+    }//End Method
+
+
+    public function AgentDetails($id) {
+
+    $agent = User::findOrFail($id);
+    $property = Property::where("agent_id",$id)->get();
+    
+    return view("frontend.agent.agent_details",compact('agent','property'));
 
     }//End Method
 }
