@@ -1,4 +1,12 @@
 @extends('frontend.frontend_dashboard')
+@php
+    $id = Auth::user()->id;
+    $userData = App\Models\User::findOrFail($id);
+
+@endphp
+@section('title')
+    {{$userData->name}}
+@endsection
 @section('main')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 

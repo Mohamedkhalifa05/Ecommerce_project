@@ -1,4 +1,13 @@
 @extends('frontend.frontend_dashboard')
+
+@php
+    $id = Auth::id();
+    $userData = App\Models\User::findOrFail($id)
+@endphp
+
+@section('title')
+    {{$userData->name}}
+@endsection
 @section('main')
 
 
@@ -25,13 +34,16 @@
         <section class="properties-section centred">
             <div class="auto-container">
                 <div class="table-outer">
+                   
+                        
                     <table class="properties-table">
                        
+                       
                         <tbody id="compare">
+            
+                        </tbody>  
+                   
 
-
-                            
-                        </tbody>    
                     </table>
                 </div>
             </div>

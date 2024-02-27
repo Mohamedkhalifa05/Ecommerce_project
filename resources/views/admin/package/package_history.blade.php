@@ -1,5 +1,12 @@
 @extends("admin.admin_dashboard")
+@php
+    $id = Auth::id();
+    $userData = App\Models\User::findOrFail($id)
+@endphp
 
+@section('title')
+    {{$userData->name}}
+@endsection
 
 @section('admin')
 <div class="page-content">

@@ -100,6 +100,13 @@
            
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="{{route('agent.property.message')}}"  >
+            <i class="link-icon" data-feather="calendar"></i>
+            <span class="link-title">Property Message</span>
+           
+          </a>
+        </li>
        
         {{-- <li class="nav-item">
           <a href="pages/apps/chat.html" class="nav-link">

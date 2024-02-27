@@ -1,9 +1,22 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
 
+@if (Auth::check())
+    @php
+        $id = Auth::id();
+        $userData = App\Models\User::findOrFail($id);
+    @endphp
+    @section('title')
+    {{$userData->name}}
+  @endsection
+@else
 @section('title')
-  Easy Real Estate Complete Project  
+  Khalifa Estate Project  
 @endsection
+    
+@endif
+
+
 
         <!-- banner-section -->
          @include('frontend.home.banner')

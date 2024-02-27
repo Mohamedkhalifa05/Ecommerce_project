@@ -1,4 +1,13 @@
 @extends('frontend.frontend_dashboard')
+
+@php
+    $id = Auth::user()->id;
+    $userData = App\Models\User::findOrFail($id);
+
+@endphp
+@section('title')
+    {{$userData->name}}
+@endsection
 @section('main')
 
 
@@ -6,10 +15,10 @@
         <section class="page-title centred" style="background-image: url({{ asset('frontend/assets/images/background/page-title-5.jpg') }});">
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>User Profile </h1>
+                    <h1>{{$userData->name}} </h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="index.html">Home</a></li>
-                        <li>User Profile </li>
+                        <li>{{$userData->name}} </li>
                     </ul>
                 </div>
             </div>
@@ -44,7 +53,7 @@
                     <div class="post-inner">
                         <div class="post">
                             <figure class="post-thumb"><a href="blog-details.html">
-       <img src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo) : url('upload/no_image.jpg') }}" alt=""></a></figure>
+       <img src="{{ (!empty($userData->photo)) ? asset($userData->photo) : url('upload/no_image.jpg') }}" alt=""></a></figure>
         <h5><a href="blog-details.html">{{ $userData->name }} </a></h5>
          <p>{{ $userData->email }} </p>
                         </div> 

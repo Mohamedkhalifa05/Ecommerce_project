@@ -82,6 +82,13 @@
            
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="{{route('admin.property.message')}}"  >
+            <i class="link-icon" data-feather="calendar"></i>
+            <span class="link-title">Property Message</span>
+           
+          </a>
+        </li>
        
         {{-- <li class="nav-item">
           <a href="pages/apps/chat.html" class="nav-link">
@@ -107,69 +114,7 @@
                 <a href="{{route('add.agent')}}"
                  class="nav-link">Add agent</a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="pages/ui-components/badges.html" class="nav-link">Badges</a>
-              </li> --}}
-              {{-- <li class="nav-item">
-                <a href="pages/ui-components/breadcrumbs.html" class="nav-link">Breadcrumbs</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/buttons.html" class="nav-link">Buttons</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/button-group.html" class="nav-link">Button group</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/cards.html" class="nav-link">Cards</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/carousel.html" class="nav-link">Carousel</a>
-              </li>
-              <li class="nav-item">
-                  <a href="pages/ui-components/collapse.html" class="nav-link">Collapse</a>
-                </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/dropdowns.html" class="nav-link">Dropdowns</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/list-group.html" class="nav-link">List group</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/media-object.html" class="nav-link">Media object</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/modal.html" class="nav-link">Modal</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/navs.html" class="nav-link">Navs</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/navbar.html" class="nav-link">Navbar</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/pagination.html" class="nav-link">Pagination</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/popover.html" class="nav-link">Popovers</a> --}}
-              {{-- </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/progress.html" class="nav-link">Progress</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/scrollbar.html" class="nav-link">Scrollbar</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/scrollspy.html" class="nav-link">Scrollspy</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/spinners.html" class="nav-link">Spinners</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/tabs.html" class="nav-link">Tabs</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/ui-components/tooltips.html" class="nav-link">Tooltips</a>
-              </li> --}}
+            
             </ul>
           </div>
         </li>

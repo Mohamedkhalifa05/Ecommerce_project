@@ -38,15 +38,26 @@
                                 @endif
                                 
                             </div>
+
+
                             <div class="title-text"><h4 style="width:292px !important"><a href="property-details.html">{{$item->property_name}}</a></h4></div>
                             <div class="price-box clearfix">
                                 <div class="price-info pull-left">
                                     <h6>Start From</h6>
                                     <h4>${{$item->lowest_price}}</h4>
+                                    
                                 </div>
+                               
                                 <ul class="other-option pull-right clearfix">
-                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
+                                    <li><a aria-label='Add To Compare' class="action-btn"
+                                        id='{{$item->id}}' onclick="addToCompare(this.id)"><i class="icon-12"></i></a></li>
+                                   
+                                    <li  ><a aria-label='Add To Wishlist' class="action-btn"
+                                        id='{{$item->id}}' onclick="addToWishList(this.id)"><i class="icon-13"></i></a></li>
+                
+                                   
+                                   
+                                    
                                 </ul>
                             </div>
                             {{-- <p>{{$item->short_descp}}</p> --}}

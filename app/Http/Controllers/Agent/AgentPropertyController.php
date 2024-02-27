@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Property;
+use App\Models\PropertyMessage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -562,6 +563,27 @@ public function Agentinactive_Property(Request $request){
     return $pdf->download($username.".".'invoice.pdf');
 
  }//End Method
+
+ public function agentPropertyMessage() {
+
+    $id = Auth::user()->id;
+    $user_msg = PropertyMessage::where("agent_id",$id)->get();
+
+    return view('agent.message.all_message',compact('user_msg'));
+
+ }//End Method
+
+ public function AgentDessageDetails($uid) {
+
+    $id = Auth::user()->id;
+    $user_msg = PropertyMessage::where("agent_id",$id)->get();
+
+    
+    $msgdetails = PropertyMessage::find($uid);
+
+    return view('agent.message.message_details',compact('user_msg','msgdetails'));
+
+ }//end Method
 
 
 }

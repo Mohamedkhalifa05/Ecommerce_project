@@ -1,6 +1,13 @@
 @extends('agent.agent_dashboard')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
+@php
+$id = Auth::id();
+$userData = App\Models\User::findOrFail($id);
+@endphp
+@section('title')
+{{$userData->name}}
+@endsection
 
 @section('agent')
 <div class="page-content">

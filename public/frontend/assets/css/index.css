@@ -40,3 +40,23 @@ margin-left: 157px;
   margin-left: 202px;
 }
 /* p {color: white !important;} */
+.home:before {
+  position: absolute;
+    content: '';
+    margin-left: -2px;
+    background-color: #e5e7ec;
+    width: 2px;
+    height: 48px;
+    top: 1px;
+    right: 1px;
+}
+.list:before {
+  position: absolute;
+    content: '';
+    margin-left: -2px;
+    background-color: #e5e7ec;
+    width: 2px;
+    height: 48px;
+    top: 1px;
+    right: 1px;
+}

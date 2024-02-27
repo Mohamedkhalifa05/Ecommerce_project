@@ -1,4 +1,19 @@
 @extends('frontend.frontend_dashboard')
+@if (Auth::check())
+    @php
+        $id = Auth::id();
+        $userData = App\Models\User::findOrFail($id);
+    @endphp
+    @section('title')
+    {{$userData->name}}
+  @endsection
+@else
+@section('title')
+  Khalifa Estate Project  
+@endsection
+    
+@endif
+    
 @section('main')
 
 
@@ -257,16 +272,34 @@
 
                            <div>
                                 <div class="form-inner">
-                                    <form action="property-details.html" method="post" class="default-form">
+                                    @auth
+                                    @php
+                                        $id = Auth::id();
+                                        $userData = App\Models\User::findOrFail($id);
+                                    @endphp
+                                    <form action="{{route('property.message')}}" method="post" class="default-form">
+                                        @csrf
+                                        <input type="hidden" name="property_id" value="{{$property->id}}">
+
+                                        <input type="hidden" name="agent_id" value="{{$property->agent_id}}">
+
                                         <div class="form-group">
-                                            <input type="text" name="name" placeholder="Your name" required="">
+                                            <input type="text" readonly  name="msg_name" value='{{$userData->name}}' >
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" placeholder="Your Email" required="">
+                                            <input type="email" readonly  name="msg_email" value='{{$userData->email}}' >
                                         </div>
+                                        @if ($userData->phone != null)
                                         <div class="form-group">
-                                            <input type="text" name="phone" placeholder="Phone" required="">
+                                            <input type="text" readonly  name="msg_phone" value='{{$userData->phone}}'  >
                                         </div>
+                                        @else
+                                        <div class="form-group">
+                                            <input type="text" readonly name="msg_phone" value='' >
+                                        </div>
+                                            
+                                        @endif
+                                       
                                         <div class="form-group">
                                             <textarea name="message" placeholder="Message"></textarea>
                                         </div>
@@ -274,6 +307,30 @@
                                             <button type="submit" class="theme-btn btn-one">Send Message</button>
                                         </div>
                                     </form>
+                                        @else
+                                        <form action="{{route('property.message')}}" method="post" class="default-form">
+                                            @csrf
+                                            <input type="hidden" name="property_id" value="{{$property->id}}">
+
+                                            <input type="hidden" name="agent_id" value="{{$property->agent_id}}">
+                                            <div class="form-group">
+                                                <input type="text" name="msg_name" placeholder="Your name" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email"  name="msg_email" placeholder="Your Email" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text"  name="msg_phone" placeholder="Phone" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="message" placeholder="Message"></textarea>
+                                            </div>
+                                            <div class="form-group message-btn">
+                                                <button type="submit" class="theme-btn btn-one">Send Message</button>
+                                            </div>
+                                        </form>
+                                    @endauth
+                                    
                                 </div>
                             </div>
                             <div class="calculator-widget sidebar-widget">
@@ -315,127 +372,68 @@
                         </div>
                     </div>
                 </div>
+                @if ($related_properties ===  null )
+                    
+                @else
                 <div class="similar-content">
                     <div class="title">
                         <h4>Similar Properties</h4>
                     </div>
                     <div class="row clearfix">
+
+                 
+                        @foreach ($related_properties as $item)
+ 
                         <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
                             <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><img src="assets/images/feature/feature-1.jpg" alt=""></figure>
+                                        <figure class="image"><img src="{{asset($item->property_thambnail)}}" alt=""></figure>
                                         <div class="batch"><i class="icon-11"></i></div>
-                                        <span class="category">Featured</span>
+                                        <span class="category">{{$item->type->type_name}}</span>
                                     </div>
                                     <div class="lower-content">
                                         <div class="author-info clearfix">
                                             <div class="author pull-left">
-                                                <figure class="author-thumb"><img src="assets/images/feature/author-1.jpg" alt=""></figure>
-                                                <h6>Michael Bean</h6>
+                                                <figure class="author-thumb"><img src="{{asset($item->user->photo)}}" alt=""></figure>
+                                                <h6 style="18px !important;">{{$item->user->name}}</h6>
                                             </div>
-                                            <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
+                                            <div class="buy-btn pull-right">
+                                                @if ($item->property_status == 'buy')
+                                                <a href="property-details.html">For Buy</a></div>
+                                                @else
+                                                <a href="property-details.html">For Rent</a></div>
+                                                @endif
+                                                
+                                                
                                         </div>
-                                        <div class="title-text"><h4><a href="property-details.html">Villa on Grand Avenue</a></h4></div>
+                                        <div class="title-text"><h4 style="width:292px !important"><a href="property-details.html">{{$item->property_name}}</a></h4></div>
                                         <div class="price-box clearfix">
                                             <div class="price-info pull-left">
                                                 <h6>Start From</h6>
-                                                <h4>$30,000.00</h4>
+                                                <h4>${{$item->lowest_price}}</h4>
                                             </div>
                                             <ul class="other-option pull-right clearfix">
                                                 <li><a href="property-details.html"><i class="icon-12"></i></a></li>
                                                 <li><a href="property-details.html"><i class="icon-13"></i></a></li>
                                             </ul>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
+                                        {{-- <p>{{Lorem ipsum dolor sit amet consectetur adipisicing sed}}...</p> --}}
                                         <ul class="more-details clearfix">
-                                            <li><i class="icon-14"></i>3 Beds</li>
-                                            <li><i class="icon-15"></i>2 Baths</li>
-                                            <li><i class="icon-16"></i>600 Sq Ft</li>
+                                            <li><i class="icon-14"></i>{{$item->bedrooms}} Beds</li>
+                                            <li><i class="icon-15"></i>{{$item->bathrooms}} Baths</li>
+                                            <li><i class="icon-16"></i>{{$item->property_size}} Sq Ft</li>
                                         </ul>
-                                        <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
+                                        <div class="btn-box"><a href="{{url('property/details/'.$item->id."/".$item->property_slug)}}" class="theme-btn btn-two">See Details</a></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                            <div class="feature-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                                <div class="inner-box">
-                                    <div class="image-box">
-                                        <figure class="image"><img src="assets/images/feature/feature-2.jpg" alt=""></figure>
-                                        <div class="batch"><i class="icon-11"></i></div>
-                                        <span class="category">Featured</span>
-                                    </div>
-                                    <div class="lower-content">
-                                        <div class="author-info clearfix">
-                                            <div class="author pull-left">
-                                                <figure class="author-thumb"><img src="assets/images/feature/author-2.jpg" alt=""></figure>
-                                                <h6>Robert Niro</h6>
-                                            </div>
-                                            <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
-                                        </div>
-                                        <div class="title-text"><h4><a href="property-details.html">Contemporary Apartment</a></h4></div>
-                                        <div class="price-box clearfix">
-                                            <div class="price-info pull-left">
-                                                <h6>Start From</h6>
-                                                <h4>$45,000.00</h4>
-                                            </div>
-                                            <ul class="other-option pull-right clearfix">
-                                                <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                        <ul class="more-details clearfix">
-                                            <li><i class="icon-14"></i>3 Beds</li>
-                                            <li><i class="icon-15"></i>2 Baths</li>
-                                            <li><i class="icon-16"></i>600 Sq Ft</li>
-                                        </ul>
-                                        <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                            <div class="feature-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                <div class="inner-box">
-                                    <div class="image-box">
-                                        <figure class="image"><img src="assets/images/feature/feature-3.jpg" alt=""></figure>
-                                        <div class="batch"><i class="icon-11"></i></div>
-                                        <span class="category">Featured</span>
-                                    </div>
-                                    <div class="lower-content">
-                                        <div class="author-info clearfix">
-                                            <div class="author pull-left">
-                                                <figure class="author-thumb"><img src="assets/images/feature/author-3.jpg" alt=""></figure>
-                                                <h6>Keira Mel</h6>
-                                            </div>
-                                            <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
-                                        </div>
-                                        <div class="title-text"><h4><a href="property-details.html">Luxury Villa With Pool</a></h4></div>
-                                        <div class="price-box clearfix">
-                                            <div class="price-info pull-left">
-                                                <h6>Start From</h6>
-                                                <h4>$63,000.00</h4>
-                                            </div>
-                                            <ul class="other-option pull-right clearfix">
-                                                <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                        <ul class="more-details clearfix">
-                                            <li><i class="icon-14"></i>3 Beds</li>
-                                            <li><i class="icon-15"></i>2 Baths</li>
-                                            <li><i class="icon-16"></i>600 Sq Ft</li>
-                                        </ul>
-                                        <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                       
                     </div>
                 </div>
+                @endif
             </div>
         </section>
         <!-- property-details end -->

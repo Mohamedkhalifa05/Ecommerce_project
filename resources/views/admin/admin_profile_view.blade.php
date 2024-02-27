@@ -1,5 +1,16 @@
 @extends("admin.admin_dashboard")
 
+    @php
+        $id = Auth::id();
+        $userData = App\Models\User::findOrFail($id);
+    @endphp
+    @section('title')
+    {{$userData->name}}
+  @endsection
+
+
+
+
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 

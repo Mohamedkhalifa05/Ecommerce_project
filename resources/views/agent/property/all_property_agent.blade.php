@@ -1,5 +1,12 @@
 @extends("agent.agent_dashboard")
 
+@php
+$id = Auth::id();
+$userData = App\Models\User::findOrFail($id);
+@endphp
+@section('title')
+{{$userData->name}}
+@endsection
 
 @section('agent')
 <div class="page-content">

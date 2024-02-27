@@ -5,12 +5,13 @@
     <div class="header-top">
         <div class="top-inner clearfix">
             <div class="left-column pull-left">
-                <ul class="info clearfix">
+                <ul class="info clearfix" style="margin-left: -16px;
+              }">
                     <li><i class="far fa-map-marker-alt"></i>Discover St, New York, NY 10012, USA</li>
                     <li><i class="far fa-clock"></i>{{ date('m-d H:i:s') }}</li>
                     <li><i class="far fa-phone"></i><a href="tel:2512353256">+251-235-3256</a></li>
                     @auth
-                    {{-- <li><i class="fas fa-user"></i><a style="text-decoration: none" href="{{ route('dashboard') }}">Dashboard</a></li> --}}
+                    <li><i class="fas fa-user"></i><a style="text-decoration: none" href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li><i class="fas fa-user"></i><a style="text-decoration: none" href="{{ route('user.logout') }}">Logout</a></li>   
                     @else 
                     <li><i class="fas fa-user"></i><a style="text-decoration: none" href="{{ route('login') }}">Sign In</a></li>
@@ -39,7 +40,7 @@
 <div class="main-box" >
         <div class="col-3">
 <div class="logo-box">
-<figure class="logo" style=""><a href="index.html"><img style="margin-left: -36px" src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></figure>
+<figure class="logo" style=""><a href="{{url('/')}}"><img style="margin-left: -36px" src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></figure>
 </div>
 </div>
 <div class="col-1"></div>
@@ -53,7 +54,7 @@
         
       
           <ul class="navbar-nav mr-2 mt-2 mt-lg-0 d-flex justify-content-around">
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown home ">
               <a class="nav-link active dropdown-toggle" style="margin-right:7px;color:black;font-size:19px" 
               href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               >Home <span class="sr-only">(current)</span></a>
@@ -95,7 +96,7 @@
               
             </li>
             
-              <li class="nav-item dropdown ">
+              <li class="nav-item dropdown list  ">
                 <a class="nav-link dropdown-toggle" style=";font-size:19px ;margin-right:19px" 
                 href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                 >Listing</a>
