@@ -66,7 +66,7 @@ $userData = App\Models\User::findOrFail($id);
                                     </tr>
                                     <tr>
                                         <td>State</td>
-                                        <td><code>{{$property->state}}</code></td>
+                                        <td><code>{{$property->pstate->state_name}}</code></td>
                                     </tr>
                                     <tr>
                                         <td>Postal Code</td>
@@ -139,7 +139,9 @@ $userData = App\Models\User::findOrFail($id);
                                         <select name="amenities_id[]" class="js-example-basic-multiple form-select" multiple="multiple" data-width="100%">
 
                                             @foreach($amenities as $ameni)
-                                           <option style="background-color: #6571FF" value="{{ $ameni->id }}" {{(in_array($ameni->id,$property_ameni)) ? "selected" : "" }}>{{ $ameni->amenitie_name }}</option>
+                                           {{-- <option style="background-color: #6571FF" value="{{ $ameni->id }}" {{(in_array($ameni->id,$property_ameni)) ? "selected" : "" }}>{{ $ameni->amenitie_name }}</option> --}}
+                                           <option style="background-color: #6571FF" value="{{ $ameni->amenitie_name}}" {{(in_array($ameni->amenitie_name,$property_ameni)) ? "selected" : "" }}>{{ $ameni->amenitie_name }}</option>
+
                                           @endforeach
                            
                                        </select>

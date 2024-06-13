@@ -6,20 +6,28 @@
             <h5>Testimonials</h5>
             <h2>What They Say About Us</h2>
         </div>
+        @php
+            $testimonials = App\Models\Testimonial::latest()->get();
+        @endphp
         <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+
+            @foreach ($testimonials as $test)
+                
+           
             <div class="testimonial-block-one">
                 <div class="inner-box">
-                    <figure class="thumb-box"><img src="{{ asset('frontend/assets/images/resource/testimonial-1.jpg') }}" alt=""></figure>
+                    <figure class="thumb-box"><img src="{{ (!empty($test->image)) ? asset($test->image) : url('upload/no_image.jpg') }}" alt=""></figure>
                     <div class="text">
-                        <p>Our goal each day is to ensure that our residents’ needs are not only met but exceeded. To make that happen we are committed to provid ing an environment in which residents can enjoy.</p>
+                        <p>{{$test->message}}</p>
                     </div>
                     <div class="author-info">
-                        <h4>Rebeka Dawson</h4>
-                        <span class="designation">Instructor</span>
+                        <h4>{{$test->name}}</h4>
+                        <span class="designation">{{$test->position}}</span>
                     </div>
                 </div>
             </div>
-            <div class="testimonial-block-one">
+            @endforeach
+            {{-- <div class="testimonial-block-one">
                 <div class="inner-box">
                     <figure class="thumb-box"><img src="{{ asset('frontend/assets/images/resource/testimonial-2.jpg') }}" alt=""></figure>
                     <div class="text">
@@ -42,7 +50,7 @@
                         <span class="designation">Manager</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

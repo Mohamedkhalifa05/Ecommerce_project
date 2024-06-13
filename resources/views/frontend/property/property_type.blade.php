@@ -1,4 +1,17 @@
 @extends('frontend.frontend_dashboard')
+@auth
+@php
+    $id = Auth::user()->id;
+    $userData = App\Models\User::findOrFail($id);
+@endphp
+@section('title')
+{{$userData->name}} 
+@endsection
+    @else
+    @section('title')
+  Khalifa RealEstate  
+@endsection
+@endauth
 @section('main')
 
 

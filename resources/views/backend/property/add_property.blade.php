@@ -139,7 +139,13 @@ $userData = App\Models\User::findOrFail($id);
         <div class="col-sm-3">
             <div class="mb-3">
                 <label class="form-label">State</label>
-                 <input type="text" name="state"  class="form-control" >
+                <select name="state" class="form-select" id="exampleFormControlSelect1">
+                    <option selected="" disabled="">Select Type</option>
+                   @foreach($pstate as $state)
+                    <option value="{{ $state->id }}">{{ $state->state_name }}</option>
+                   @endforeach
+                </select>
+                 {{-- <input type="text" name="state"  class="form-control" > --}}
             </div>
         </div><!-- Col -->
 

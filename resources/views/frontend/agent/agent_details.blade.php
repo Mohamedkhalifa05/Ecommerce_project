@@ -1,4 +1,25 @@
 @extends('frontend.frontend_dashboard')
+
+
+@if (Auth::check())
+@php
+    $id = Auth::user()->id;
+    $userData = App\Models\User::findOrFail($id);
+
+@endphp
+@section('title')
+{{$userData->name}}
+@endsection
+@else
+
+@section('title')
+  Khalifa Estate Project  
+@endsection
+
+
+@endif
+
+
 @section('main')
 
 
@@ -1000,14 +1021,73 @@
 </div>
 </div>
 </div>
+
 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
 <div class="default-sidebar agent-sidebar">
 <div class="agents-contact sidebar-widget">
 <div class="widget-title">
-    <h5>Contact To Michael</h5>
+    <h5>Contact To {{ $agent->name}}</h5>
 </div>
 <div class="form-inner">
-    <form action="contact.html" method="post" class="default-form">
+    @auth
+                                    @php
+                                        $id = Auth::id();
+                                        $userData = App\Models\User::findOrFail($id);
+                                    @endphp
+                                    <form action="{{route('agent.details.message')}}" method="post" class="default-form">
+                                        @csrf
+                                        {{-- <input type="hidden" name="property_id" value="{{$property->id}}"> --}}
+
+                                        <input type="hidden" name="agent_id" value="{{$agent->id}}">
+
+                                        <div class="form-group">
+                                            <input type="text" readonly  name="msg_name" value='{{$userData->name}}' >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" readonly  name="msg_email" value='{{$userData->email}}' >
+                                        </div>
+                                        @if ($userData->phone != null)
+                                        <div class="form-group">
+                                            <input type="text" readonly  name="msg_phone" value='{{$userData->phone}}'  >
+                                        </div>
+                                        @else
+                                        <div class="form-group">
+                                            <input type="text" readonly name="msg_phone" value='' >
+                                        </div>
+                                            
+                                        @endif
+                                       
+                                        <div class="form-group">
+                                            <textarea name="message" placeholder="Message"></textarea>
+                                        </div>
+                                        <div class="form-group message-btn">
+                                            <button type="submit" class="theme-btn btn-one">Send Message</button>
+                                        </div>
+                                    </form>
+                                        @else
+                                        <form action="{{route('agent.details.message')}}" method="post" class="default-form">
+                                            @csrf
+                                            {{-- <input type="hidden" name="property_id" value="{{$property->id}}"> --}}
+
+                                            <input type="hidden" name="agent_id" value="{{$agent->id}}">
+                                            <div class="form-group">
+                                                <input type="text" name="msg_name" placeholder="Your name" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email"  name="msg_email" placeholder="Your Email" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text"  name="msg_phone" placeholder="Phone" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="message" placeholder="Message"></textarea>
+                                            </div>
+                                            <div class="form-group message-btn">
+                                                <button type="submit" class="theme-btn btn-one">Send Message</button>
+                                            </div>
+                                        </form>
+                                    @endauth
+    {{-- <form action="contact.html" method="post" class="default-form">
         <div class="form-group">
             <input type="text" name="name" placeholder="Your Name" required="">
         </div>
@@ -1023,7 +1103,7 @@
         <div class="form-group">
             <button type="submit" class="theme-btn btn-one">Send Message</button>
         </div>
-    </form>
+    </form> --}}
 </div>
 </div>
 <div class="category-widget sidebar-widget">
@@ -1031,8 +1111,8 @@
     <h5>Status Of Property</h5>
 </div>
 <ul class="category-list clearfix">
-    <li><a href="agents-details.html">For Rent <span>(200)</span></a></li>
-    <li><a href="agents-details.html">For Sale <span>(700)</span></a></li>
+    <li><a href="{{route("rent.property")}}">For Rent <span>({{count($propertyRend )}})</span></a></li>
+    <li><a href="{{route("buy.property")}}">For Buy <span>({{count($propertybuy)}})</span></a></li>
 </ul>
 </div>
 <div class="featured-widget sidebar-widget">
@@ -1040,71 +1120,35 @@
     <h5>Featured Properties</h5>
 </div>
 <div class="single-item-carousel owl-carousel owl-theme owl-nav-none dots-style-one">
+    @foreach ($featured as $feat)
     <div class="feature-block-one">
         <div class="inner-box">
             <div class="image-box">
-                <figure class="image"><img src="assets/images/feature/feature-1.jpg" alt=""></figure>
+                <figure class="image">
+                    <a href="{{url('property/details/'.$feat->id."/".$feat->property_slug)}}">
+                    <img src="{{(!empty($feat->property_thambnail)) ? asset($feat->property_thambnail) : url('upload/no_image.jpg')}}" alt="">
+                    </a>
+                </figure>
                 <div class="batch"><i class="icon-11"></i></div>
                 <span class="category">Featured</span>
             </div>
             <div class="lower-content">
-                <div class="title-text"><h4><a href="property-details.html">Villa on Grand Avenue</a></h4></div>
+                <div class="title-text"><h4><a href="{{url('property/details/'.$feat->id."/".$feat->property_slug)}}">{{$feat->property_name}}</a></h4></div>
                 <div class="price-box clearfix">
                     <div class="price-info">
                         <h6>Start From</h6>
-                        <h4>$30,000.00</h4>
+                        <h4>{{$feat->lowest_price}}</h4>
                     </div>
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
+                <p>{!! $feat->short_descp !!}</p>
+                <div class="btn-box"><a href="{{url('property/details/'.$feat->id."/".$feat->property_slug)}}" class="theme-btn btn-two">See Details</a></div>
             </div>
         </div>
     </div>
-    <div class="feature-block-one">
-        <div class="inner-box">
-            <div class="image-box">
-                <figure class="image"><img src="assets/images/feature/feature-2.jpg" alt=""></figure>
-                <div class="batch"><i class="icon-11"></i></div>
-                <span class="category">Featured</span>
-            </div>
-            <div class="lower-content">
-                <div class="title-text"><h4><a href="property-details.html">Family Home For Sale</a></h4></div>
-                <div class="price-box clearfix">
-                    <div class="price-info">
-                        <h6>Start From</h6>
-                        <h4>$30,000.00</h4>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-            </div>
-        </div>
-    </div>
-    <div class="feature-block-one">
-        <div class="inner-box">
-            <div class="image-box">
-                <figure class="image"><img src="assets/images/feature/feature-3.jpg" alt=""></figure>
-                <div class="batch"><i class="icon-11"></i></div>
-                <span class="category">Featured</span>
-            </div>
-            <div class="lower-content">
-                <div class="title-text"><h4><a href="property-details.html">Luxury Villa With Pool</a></h4></div>
-                <div class="price-box clearfix">
-                    <div class="price-info">
-                        <h6>Start From</h6>
-                        <h4>$30,000.00</h4>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+     
+    @endforeach
+  
+       
             </div>
         </section>
         <!-- agents-page-section end -->

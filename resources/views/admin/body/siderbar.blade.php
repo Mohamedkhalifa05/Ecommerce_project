@@ -39,6 +39,24 @@
           </div>
         </li>
         <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
+            <i class="link-icon" data-feather="mail"></i>
+            <span class="link-title">Property State</span>
+            <i class="link-arrow" data-feather="chevron-down"></i>
+          </a>
+          <div class="collapse" id="emails">
+            <ul class="nav sub-menu">
+              <li class="nav-item">
+                <a href="{{route('all.state')}}" class="nav-link">All State</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('add.state')}}" class="nav-link">Add State</a>
+              </li>
+              
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#Amenitie" role="button" aria-expanded="false" aria-controls="Amenitie">
             <i class="link-icon" data-feather="calendar"></i>
             <span class="link-title">Amenities</span>
@@ -89,6 +107,23 @@
            
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#testimonials" role="button" aria-expanded="false" aria-controls="emails">
+            <i class="link-icon" data-feather="mail"></i>
+            <span class="link-title">Manage Testimonials</span>
+            <i class="link-arrow" data-feather="chevron-down"></i>
+          </a>
+          <div class="collapse" id="testimonials">
+            <ul class="nav sub-menu">
+              <li class="nav-item">
+                <a href="{{route('all.testimonals')}}" class="nav-link">All Testimonials</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('add.testimonals')}}" class="nav-link">Add Testimonials</a>
+              </li>
+              
+            </ul>
+          </div>
        
         {{-- <li class="nav-item">
           <a href="pages/apps/chat.html" class="nav-link">
@@ -114,6 +149,26 @@
                 <a href="{{route('add.agent')}}"
                  class="nav-link">Add agent</a>
               </li>
+            
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#BlogCategory" role="button" aria-expanded="false" aria-controls="uiComponents">
+            <i class="link-icon" data-feather="feather"></i>
+            <span class="link-title">All Blog Category</span>
+            <i class="link-arrow" data-feather="chevron-down"></i>
+          </a>
+          <div class="collapse" id="uiComponents">
+            <ul class="nav sub-menu">
+              <li class="nav-item">
+                <a href="{{route('all.blog.category')}}" 
+                class="nav-link">All Blog Category</a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="{{route('add.agent')}}"
+                 class="nav-link">Add agent</a>
+              </li> --}}
             
             </ul>
           </div>

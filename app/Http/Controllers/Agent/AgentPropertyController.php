@@ -13,11 +13,14 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Property;
 use App\Models\PropertyMessage;
+use App\Models\State;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+
 
 class AgentPropertyController extends Controller
 {
@@ -36,6 +39,8 @@ class AgentPropertyController extends Controller
         
 
         $propertytype = PropertType::latest()->get();
+        $pstate = State::latest()->get();
+
 
 
         $amenities = Amenities::latest()->get();
@@ -49,7 +54,7 @@ class AgentPropertyController extends Controller
             return redirect()->route('buy.package');
             
         }else {
-        return view("agent.property.add_property",compact('propertytype','amenities'));
+        return view("agent.property.add_property",compact('propertytype','amenities',"pstate"));
             
         }
 
@@ -160,7 +165,8 @@ public function agentEditProperty($id) {
     $facilities = Facility::where("property_id",$id)->get();
 
        $property = Property::find($id);
-
+       $pstate = State::latest()->get();
+  
        $type = $property->amenities_id;
        $property_ameni = explode(",",$type);
        $PropertType = PropertType::latest()->get();
@@ -169,7 +175,7 @@ public function agentEditProperty($id) {
     //    $activeAgent = User::where("role","agent")->where("status","active")->latest()->get();
            
 
-       return view('agent.property.edit_property',compact("property","facilities","PropertType","amenities","property_ameni","multi_image"));
+       return view('agent.property.edit_property',compact("pstate","property","facilities","PropertType","amenities","property_ameni","multi_image"));
 
 }//End Method
 
@@ -568,8 +574,9 @@ public function Agentinactive_Property(Request $request){
 
     $id = Auth::user()->id;
     $user_msg = PropertyMessage::where("agent_id",$id)->get();
-
+  
     return view('agent.message.all_message',compact('user_msg'));
+   
 
  }//End Method
 

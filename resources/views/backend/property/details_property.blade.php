@@ -65,7 +65,7 @@ $userData = App\Models\User::findOrFail($id);
                                     </tr>
                                     <tr>
                                         <td>State</td>
-                                        <td><code>{{$property->state}}</code></td>
+                                        <td><code>{{$property->state_name}}</code></td>
                                     </tr>
                                     <tr>
                                         <td>Postal Code</td>

@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Models\User;
 use App\Models\PropertType;
 use App\Models\PropertyMessage;
+use App\Models\State;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,11 +37,11 @@ class PropertyController extends Controller
 
             $propertytype = PropertType::latest()->get();
            
-
-            // $amenities = DB::table('amenities')->latest()->get();
+             
+            $pstate = State::latest()->get();
             $amenities = Amenities::latest()->get();
             $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
-            return view('backend.property.add_property',compact('propertytype','amenities','activeAgent'));
+            return view('backend.property.add_property',compact('propertytype','amenities','activeAgent',"pstate"));
 
     }//End Method
 
@@ -187,12 +188,14 @@ class PropertyController extends Controller
        $type = $property->amenities_id;
        $property_ameni = explode(",",$type);
        $PropertType = PropertType::latest()->get();
+       $pstate= State::latest()->get();
+
        $multi_image = MultiImage::where("property_id",$id)->get();
        $amenities = Amenities::latest()->get();
        $activeAgent = User::where("role","agent")->where("status","active")->latest()->get();
            
 
-       return view("backend.property.edit_property",compact("property","facilities","PropertType","amenities","activeAgent","property_ameni","multi_image"));
+       return view("backend.property.edit_property",compact("property","pstate","facilities","PropertType","amenities","activeAgent","property_ameni","multi_image"));
          
     }//End Method
 

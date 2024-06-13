@@ -4,6 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\FrontEnd\CompareController;
 use App\Http\Controllers\FrontEnd\IndexController;
 use App\Http\Controllers\FrontEnd\WishlistController;
@@ -150,6 +153,48 @@ Route::middleware(["auth","role:admin"])->group(function() {
      
     });
 
+
+    /// State Route
+
+    Route::controller(StateController::class)->group(function() {
+
+        Route::get("all/states","All_States")->name("all.state") ;
+        Route::get("add/state","add_State")->name("add.state") ;
+        Route::post("store/state","State_Store")->name("store.state");
+        Route::get("edit/state/{id}" , "Edit_state")->name("edit.state");
+        Route::post("update/state","Update_state")->name('update.state');
+        Route::get("delete/state/{id}","Delete_state")->name("delete.state");
+
+    });
+
+    /// Testimonails Route
+    Route::controller(TestimonialController::class)->group(function() {
+
+        Route::get("all/testimonals","All_Testimonals")->name("all.testimonals") ;
+        Route::get("add/testimonals","add_Testimonals")->name("add.testimonals") ;
+        Route::post("store/testimonial","Testimonial_Store")->name("store.testimonial");
+        Route::get("edit/testimonial/{id}" , "Edit_Testimonial")->name("edit.testimonial");
+        Route::post("update/testimonial","Update_Testimonial")->name('update.testimonial');
+        Route::get("delete/testimonial/{id}","Delete_testimonial")->name("delete.testimonial");
+
+    });
+
+
+    /// Testimonails Route
+     /// BlogCategory Route
+     Route::controller(BlogController::class)->group(function() {
+
+        Route::get("all/blog/category","All_BlogCategory")->name("all.blog.category") ;
+        Route::post("store/blog/category","BlogCategory_Store")->name("store.blog.category");
+        Route::get("/blog/category/{id}" , "EditBlogCategory");
+        // Route::post("/update/blog/category","BlogCategory_Update")->name('update.blog.category');
+        Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+        Route::get("delete/blog/category/{id}","Delete_BlogCategory")->name("delete.blog.category");
+
+    });
+
+     /// BlogCategory Route
+
     
 
 });// Middleware Admin  Property
@@ -232,6 +277,17 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('property/details/{id}/{slug}', 'propertyDetails');
    Route::post('property/message', 'PropertyMessage')->name('property.message');
    Route::get('agent/details/{id}', 'AgentDetails')->name('agent.details');
+   Route::post('agent/details/message', 'AgentDetailsMessage')->name('agent.details.message');
+   Route::get('/rent/property', 'RentProperty')->name('rent.property');
+   Route::get('/buy/property', 'BuyProperty')->name('buy.property');
+   Route::get('property/type/{id}', 'PropertyType')->name('property.type');
+   Route::get('state/details/{id}', 'State_Details')->name('state.details');
+   Route::post('buy/property/search', 'BuyPropertySearch')->name('buy.property.search');
+   Route::post('rent/property/search', 'RentPropertySearch')->name('rent.property.search');
+   Route::post('All/property/search', 'AllPropertySearch')->name('All.property.search');
+
+   
+   
 });
 
 Route::controller(WishlistController::class)->group(function () {

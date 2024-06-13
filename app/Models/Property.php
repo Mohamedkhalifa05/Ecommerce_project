@@ -16,6 +16,13 @@ class Property extends Model
         return $this->belongsTo(PropertType::class,"ptype_id","id");
 
      }//End Method
+     
+     public function pstate() {
+
+      return $this->belongsTo(State::class,"state","id");
+
+     }//end method
+
 
      public function Amenitie() {
 

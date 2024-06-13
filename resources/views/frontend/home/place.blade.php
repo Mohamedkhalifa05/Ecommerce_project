@@ -1,3 +1,20 @@
+
+@php
+    $skip_state_0 = App\Models\State::skip(0)->first();
+    $property_0 = App\Models\Property::where("state",$skip_state_0->id)->get();
+
+
+    $skip_state_1 = App\Models\State::skip(1)->first();
+    $property_1 = App\Models\Property::where("state",$skip_state_1->id)->get();
+
+    $skip_state_2 = App\Models\State::skip(2)->first();
+    $property_2 = App\Models\Property::where("state",$skip_state_2->id)->get();
+    $skip_state_3 = App\Models\State::skip(3)->first();
+    $property_3 = App\Models\Property::where("state",$skip_state_3->id)->get();
+
+@endphp
+
+
 <!-- place-section -->
 <section class="place-section sec-pad">
     <div class="auto-container">
@@ -8,50 +25,90 @@
         </div>
         <div class="sortable-masonry">
             <div class="items-container row clearfix">
+
+
+
                 <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all illustration brand marketing software">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{ asset('frontend/assets/images/resource/place-1.jpg') }}" alt=""></figure>
+                            <figure class="image-box"><img style="width: 370px;height:580px" src="{{ asset($skip_state_0->state_image) }}" alt=""></figure>
                             <div class="text">
-                                <h4><a href="categories.html">Los Angeles</a></h4>
-                                <p>10 Properties</p>
+                                <h4><a href="{{route("state.details",$skip_state_0->id)}}">{{$skip_state_0->state_name}}</a></h4>
+                                @if (count($property_0) == 0)
+                                <p></p>  
+                                @elseif (count($property_0) > 9)
+                                <p>{{count($property_0)}} Properties</p>
+                                @else
+                                <p>0{{count($property_0)}} Properties</p>
+                                @endif
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all brand illustration print software logo">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{ asset('frontend/assets/images/resource/place-2.jpg') }}" alt=""></figure>
+                            <figure class="image-box"><img style="width: 370px;height:275px" src="{{ asset($skip_state_1->state_image) }}" alt=""></figure>
                             <div class="text">
-                                <h4><a href="categories.html">San Francisco</a></h4>
-                                <p>08 Properties</p>
+                                <h4><a href="{{route("state.details",$skip_state_1->id)}}">{{$skip_state_1->state_name}}</a></h4>
+                                @if (count($property_1) == 0)
+                                <p></p>  
+                                @elseif (count($property_1) > 9)
+                                <p>{{count($property_1)}} Properties</p>
+                                @else
+                                <p>0{{count($property_1)}} Properties</p>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all illustration marketing logo">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{ asset('frontend/assets/images/resource/place-3.jpg') }}" alt=""></figure>
+                            <figure class="image-box"><img style="width: 370px;height:275px" src="{{ asset($skip_state_2->state_image) }}" alt=""></figure>
                             <div class="text">
-                                <h4><a href="categories.html">Las Vegas</a></h4>
-                                <p>29 Properties</p>
+                                <h4><a href="{{route("state.details",$skip_state_2->id)}}">{{$skip_state_2->state_name}}</a></h4>
+                                @if (count($property_2) == 0)
+                                <p></p>  
+                                @elseif (count($property_2) > 9)
+                                <p>{{count($property_2)}} Properties</p>
+                                @else
+                                <p>0{{count($property_2)}} Properties</p>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-8 col-md-6 col-sm-12 masonry-item small-column all brand marketing print software">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{ asset('frontend/assets/images/resource/place-4.jpg') }}" alt=""></figure>
+                            <figure class="image-box"><img style="width:770px;height:275px" src="{{ asset($skip_state_2->state_image) }}" alt=""></figure>
                             <div class="text">
-                                <h4><a href="categories.html">New York City</a></h4>
-                                <p>05 Properties</p>
+                                <h4><a href="{{route("state.details",$skip_state_3->id)}}">{{$skip_state_3->state_name}}</a></h4>
+                                @if (count($property_3) == 0)
+                                <p></p>  
+                                @elseif (count($property_3) > 9)
+                                <p>{{count($property_3)}} Properties</p>
+                                @else
+                                <p>0{{count($property_3)}} Properties</p>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

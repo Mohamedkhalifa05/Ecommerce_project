@@ -1,8 +1,25 @@
 @extends('frontend.frontend_dashboard')
-@section('main')
+
+
+@if (Auth::check())
+@php
+    $id = Auth::user()->id;
+    $userData = App\Models\User::findOrFail($id);
+@endphp
 @section('title')
-  Rent Property Easy RealEstate  
+{{$userData->name}} 
 @endsection
+@else
+@section('title')
+Rent Property Khalifa RealEstate  
+@endsection
+@endif
+
+    
+   
+
+@section('main')
+
 
  <!--Page Title-->
         <section class="page-title-two bg-color-1 centred">
@@ -21,7 +38,11 @@
             </div>
         </section>
         <!--End Page Title-->
-
+        @php
+        $states = App\Models\State::latest()->get();
+        $ptypes = App\Models\PropertType::latest()->get();
+    
+        @endphp
 
         <!-- property-page-section -->
         <section class="property-page-section property-list">
@@ -33,71 +54,82 @@
                                 <div class="widget-title">
                                     <h5>Property</h5>
                                 </div>
-                               
- @php
-$states = App\Models\State::latest()->get();
-$ptypes = App\Models\PropertyType::latest()->get();
 
- @endphp
+                                <form action="{{route("All.property.search")}}" method="post" class="search-form">
+                                    @csrf
 
-  <form action="{{ route('all.property.search') }}" method="post" class="search-form">
-    @csrf 
+                                <div class="widget-content">
+                                    <div class="select-box">
+                                        <select name="property_status" class="wide">
+                                           <option data-display="All Type">All Status</option>
+                                           <option value="buy">Buy</option>
+                                           <option value="rent">Rent</option>
+                                           {{-- <option value="3">Residential</option> --}}
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="ptype_id" class="wide">
+                                           <option data-display="Select Type">Select Type</option>
+                                           @foreach ($ptypes as $type)
+                                           <option value="{{$type->type_name}}">{{$type->type_name}}</option>  
+                                           @endforeach
+                                           {{-- <option value="1">New York</option>
+                                           <option value="2">California</option>
+                                           <option value="3">London</option>
+                                           <option value="4">Maxico</option> --}}
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="state" class="wide">
+                                           <option data-display="State">Select State</option>
+                                           @foreach ($states as $state)
+                                          <option value="{{$state->state_name}}">{{$state->state_name}}</option>  
+                                          @endforeach
+                                           {{-- <option value="1">New York</option>
+                                           <option value="2">California</option>
+                                           <option value="3">London</option>
+                                           <option value="4">Maxico</option> --}}
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="bedrooms" class="wide">
+                                           <option data-display="Rooms">Max Rooms</option>
+                                           <option value="1">1 Rooms</option>
+                                           <option value="2">2 Rooms</option>
+                                           <option value="3">3 Rooms</option>
+                                           <option value="4">4 Rooms</option>
+                                           <option value="5">5 Rooms</option>
 
-    <div class="widget-content">
-        <div class="select-box">
-            <select name="property_status" class="wide">
-               <option data-display="All Type">All Status</option>
-               <option value="rent">Rent</option>
-               <option value="buy">Buy</option> 
-            </select>
-        </div>
-        <div class="select-box">
-            <select name="ptype_id" class="wide">
-               <option data-display="Type" selected="" disabled="" >Select Type</option>
-               
-              @foreach($ptypes as $type)
-   <option value="{{ $type->type_name }}">{{ $type->type_name }}</option>
-   @endforeach
-                
-            </select>
-        </div>
-        <div class="select-box">
-            <select name="state" class="wide">
-               <option data-display="State" selected="" disabled="" >Select State</option>
-               @foreach($states as $state)
-   <option value="{{ $state->state_name }}">{{ $state->state_name }}</option>
-   @endforeach
-            </select>
-        </div>
-        <div class="select-box">
-            <select name="bedrooms" class="wide">
-               <option data-display="Rooms">Max Rooms</option>
-               <option value="1">1 Rooms</option>
-               <option value="2">2 Rooms</option>
-               <option value="3">3 Rooms</option>
-               <option value="4">4 Rooms</option>
-               <option value="5">5 Rooms</option>
-            </select>
-        </div>
-        <div class="select-box">
-            <select name="bathrooms" class="wide">
-               <option data-display="BathRooms">Max BathRoom</option>
-               <option value="1">1 BathRoom</option>
-               <option value="2">2 BathRoom</option>
-               <option value="3">3 BathRoom</option>
-               <option value="4">4 BathRoom</option>
-               <option value="5">5 BathRoom</option>
-            </select>
-        </div>
-      
-        <div class="filter-btn">
-            <button type="submit" class="theme-btn btn-one"><i class="fas fa-filter"></i>&nbsp;Filter</button>
-        </div>
-    </div>
-</form>
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="bathrooms" class="wide">
+                                            <option data-display="Bathrooms">Max Bathrooms</option>
+                                            <option value="1">1 Bathrooms</option>
+                                            <option value="2">2 Bathrooms</option>
+                                            <option value="3">3 Bathrooms</option>
+                                            <option value="4">4 Bathrooms</option>
+                                            <option value="5">5 Bathrooms</option>
+ 
+                                         </select>
+                                    </div>
+                                    {{-- <div class="select-box">
+                                        <select name="Bathrooms" class="wide">
+                                           <option data-display="All Type">Select Floor</option>
+                                           <option value="1">2x Floor</option>
+                                           <option value="2">3x Floor</option>
+                                           <option value="3">4x Floor</option>
+                                        </select>
+                                    </div> --}}
+                                    <div class="filter-btn">
+                                        <button type="submit" class="theme-btn btn-one"><i class="fas fa-filter"></i>&nbsp;Filter</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
 
 
-</div>
+                        
                             <div class="price-filter sidebar-widget">
                                 <div class="widget-title">
                                     <h5>Select Price Range</h5>
@@ -116,8 +148,8 @@ $ptypes = App\Models\PropertyType::latest()->get();
                                     <h5>Status Of Property</h5>
                                 </div>
                                 <ul class="category-list clearfix">
-       <li><a href="{{ route('rent.property') }}">For Rent <span>(200)</span></a></li>
-   <li><a href="{{ route('buy.property') }}">For Buy <span>(700)</span></a></li>
+                                    <li><a href="property-details.html">For Rent <span>(200)</span></a></li>
+                                    <li><a href="property-details.html">For Sale <span>(700)</span></a></li>
                                 </ul>
                             </div>
                              
@@ -162,23 +194,23 @@ $ptypes = App\Models\PropertyType::latest()->get();
                                 <h4>${{ $item->lowest_price }}</h4>
                             </div>
    
-  @if($item->agent_id == Null)
+  {{-- @if($item->agent_id == Null)
 <div class="author-box pull-right">
         <figure class="author-thumb"> 
             <img src="{{ url('upload/ariyan.jpg') }}" alt="">
             <span>Admin</span>
         </figure>
     </div>
-  @else 
+  @else  --}}
 
    <div class="author-box pull-right">
         <figure class="author-thumb"> 
-            <img src="{{ (!empty($item->user->photo)) ? url('upload/agent_images/'.$item->user->photo) : url('upload/no_image.jpg') }}" alt="">
+            <img src="{{ (!empty($item->user->photo)) ? asset($item->user->photo) : url('upload/no_image.jpg') }}" alt="">
             <span>{{ $item->user->name }}</span>
         </figure>
     </div>
 
-  @endif 
+  {{-- @endif  --}}
                         </div>
                         <p>{{ $item->short_descp }}</p>
                         <ul class="more-details clearfix">
@@ -205,9 +237,25 @@ $ptypes = App\Models\PropertyType::latest()->get();
                                 </div>
                                
                             </div>
-        <div class="pagination-wrapper">
-            {{ $property->links('vendor.pagination.custom') }}
-        </div>
+                            <div class="pagination-wrapper">
+
+                            @if ($property->count() == 1)
+                                <ul class="pagination clearfix">
+                                    <li><a href="property-list.html" class="current">1</a></li>
+                                </ul>
+                                @else
+                                {{$property ->links("vendor.pagination.custom")}}
+                                @endif
+                            </div>
+                            {{-- <div class="pagination-wrapper">
+                                {{$property->links("vendor.pagination.custom")}} --}}
+                                {{-- <ul class="pagination clearfix">
+                                    <li><a href="property-list.html" class="current">1</a></li>
+                                    <li><a href="property-list.html">2</a></li>
+                                    <li><a href="property-list.html">3</a></li>
+                                    <li><a href="property-list.html"><i class="fas fa-angle-right"></i></a></li>
+                                </ul> --}}
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>
