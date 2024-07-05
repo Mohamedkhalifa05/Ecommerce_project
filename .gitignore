@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/backend
+/public/frontend
+/public/upload
+/resources/views
+/Ecommerce_project2.zip
+/laravel.sql

@@ -44,7 +44,7 @@
             <h4><a href="{{ url('blog/details/'.$item->post_slug) }}">{{ $item->post_title }}</a></h4>
             <ul class="post-info clearfix">
                 <li class="author-box">
-                    <figure class="author-thumb"><img src="{{ (!empty($item->user->photo)) ? url('upload/admin_images/'.$item->user->photo) : url('upload/no_image.jpg') }}" alt=""></figure>
+                    <figure class="author-thumb"><img src="{{ (!empty($item->user->photo)) ? asset($item->user->photo) : url('upload/no_image.jpg') }}" alt=""></figure>
   <h5><a href=" ">{{ $item['user']['name'] }}</a></h5>
                 </li>
                 <li>{{ $item->created_at->format('M d Y') }}</li>
@@ -110,11 +110,14 @@
            @foreach($bcategory as $cat)
 
            @php
-        $post = App\Models\BlogPost::where('blogcat_id',$cat->id)->get();
+        $post = App\Models\BlogPost::where('blog_cat_id',$cat->id)->get();
            @endphp
 
-
-  <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}<span>({{ count($post) }})</span></a></li>
+   @if (count($post)  == 0)
+  <li style="visibility: hidden"><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}<span>({{ count($post) }})</span></a></li>
+   @else
+  <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}<span>({{ count($post) }})</span></a></li>  
+   @endif
             @endforeach
         </ul>
     </div>

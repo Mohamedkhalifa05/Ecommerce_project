@@ -134,7 +134,7 @@
        
         <li class="nav-item nav-category">User All Functions</li>
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
+          <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="Agent">
             <i class="link-icon" data-feather="feather"></i>
             <span class="link-title">Mange Agent</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
@@ -154,48 +154,44 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#BlogCategory" role="button" aria-expanded="false" aria-controls="uiComponents">
+          <a class="nav-link" data-bs-toggle="collapse" href="#BlogCategory" role="button" aria-expanded="false" aria-controls="BlogCategory">
             <i class="link-icon" data-feather="feather"></i>
             <span class="link-title">All Blog Category</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
-          <div class="collapse" id="uiComponents">
+          <div class="collapse" id="BlogCategory">
             <ul class="nav sub-menu">
               <li class="nav-item">
                 <a href="{{route('all.blog.category')}}" 
                 class="nav-link">All Blog Category</a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('add.agent')}}"
-                 class="nav-link">Add agent</a>
-              </li> --}}
-            
             </ul>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false" aria-controls="advancedUI">
+          <a class="nav-link" data-bs-toggle="collapse" href="#Posts" role="button" aria-expanded="false" aria-controls="Posts">
             <i class="link-icon" data-feather="anchor"></i>
-            <span class="link-title">Advanced UI</span>
+            <span class="link-title">Blog Post</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
-          <div class="collapse" id="advancedUI">
+          <div class="collapse" id="Posts">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/advanced-ui/cropper.html" class="nav-link">Cropper</a>
+                <a href="{{route('all.posts')}}" class="nav-link">All Posts</a>
               </li>
               <li class="nav-item">
-                <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Owl carousel</a>
+                <a href="{{route('add.post')}}" class="nav-link">Add Post</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="pages/advanced-ui/sortablejs.html" class="nav-link">SortableJs</a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="pages/advanced-ui/sweet-alert.html" class="nav-link">Sweet Alert</a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </li>
+        
         
         <li class="nav-item nav-category">Docs</li>
         <li class="nav-item">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use App\Models\Facility;
 use App\Models\MultiImage;
 use App\Models\PropertType;
@@ -222,5 +224,6 @@ class IndexController extends Controller
 
           
         }//End Method 
+
     
 }

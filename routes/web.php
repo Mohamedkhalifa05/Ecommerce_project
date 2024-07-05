@@ -178,9 +178,21 @@ Route::middleware(["auth","role:admin"])->group(function() {
         Route::get("delete/testimonial/{id}","Delete_testimonial")->name("delete.testimonial");
 
     });
+    /// Posts Route
+    
+    Route::controller(BlogController::class)->group(function() {
+
+        Route::get("all/posts","All_Posts")->name("all.posts") ;
+        Route::get("add/post","add_Post")->name("add.post") ;
+        Route::post("store/post","Post_Store")->name('store.post');
+        Route::get("edit/post/{id}" , "Edit_Post")->name("edit.post");
+        Route::post("update/post","UpdatePost")->name('update.post');
+        Route::get("delete/post/{id}","Delete_Post")->name("delete.post");
+
+    });
 
 
-    /// Testimonails Route
+    /// Posts Route
      /// BlogCategory Route
      Route::controller(BlogController::class)->group(function() {
 
@@ -288,6 +300,16 @@ Route::controller(IndexController::class)->group(function () {
 
    
    
+});
+
+Route::controller(BlogController::class)->group(function() {
+    Route::get('blog/details/{id}', 'Blog_Details')->name('blog.details');
+    Route::get('blog/details_side/{id}', 'Blog_Details_side')->name('blog.details.side');
+    Route::get('blog/cat/list/{id}', 'Blog_CatList')->name('blog.cat.list');
+
+    
+
+
 });
 
 Route::controller(WishlistController::class)->group(function () {
